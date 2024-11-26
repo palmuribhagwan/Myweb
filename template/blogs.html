@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+{% block link %}<link rel="stylesheet" href="{% static 'css/blogs.css' %}">{% endblock  %}
+{% block  main %}
+<style>
+    .Blogs{
+        border-bottom:4px solid #2100df;
+    }
+</style>
+{% for main in Blog_headers %}
+    {% if main.desk_image %}
+    <div class="project-img desktop">
+        <img src="{{main.desk_image.url}}">
+    </div>
+    {%endif%}
+    {% if main.moble_image %}
+    <div class="project-img mobile">
+        <img src="{{main.moble_image.url}}">
+    </div>
+    {% endif %}
+{% endfor %}
+<main class="project-main">
+    {% if Blog_headers %}
+    <section class="main">
+        {% for main in Blog_headers %}
+        <div>
+            <h1>{{main.Title}}</h1>
+            {% if main.paragraph %}
+            <p>{{main.paragraph}}</p>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </section>
+    {% endif %}
+    {% if Blogs %}
+    {% for Blog in Blogs %}
+    <section class="project">
+        <div class='image-container'>
+            <img src="{{Blog.image.url}}" alt="Image 1">
+        </div>
+        <div class='image-content'>
+            <h2>{{Blog.title}}</h2>
+            <p class="description">{{Blog.paragaph}}</p>
+        </div>
+    </section>
+    {% endfor %}
+    {% endif %}
+</main>
+{% endblock %}

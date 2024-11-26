@@ -1,0 +1,114 @@
+.resume{
+    border-bottom:4px solid #2100df;
+}
+.Resume {
+    display: flex;
+    justify-content: center;
+}
+.Resume img{
+    width: 350px;
+    border-radius: 10px;
+}
+.Resume-about{
+    display: flex;
+    justify-content: center;
+}
+.Resume-about div h1{
+    display: flex;
+    justify-content: center;
+}
+.Resume-education{
+    display: flex;
+    justify-content: center;
+}
+.container {
+    display: flex;
+    background: white;
+    overflow: hidden;
+}
+.container div{
+    margin:5px;
+}
+.study-level {
+    flex: 1;
+    padding: 20px;
+    text-align: center;
+}
+
+.higher-edu {
+    background-color: #e3f2fd;
+    border-right: 1px solid #ddd;
+}
+.skills {
+    background-color: #fce4ec;
+    padding: 20px;
+    width: 300px;
+}
+.display-items{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+.experience{
+    min-width: 450px;
+}
+.download_button img{
+    width:50px;
+}
+.download_button {
+    position: fixed;
+    bottom: 10px;
+    right: 10px; 
+    display: inline-block;
+}
+
+.download_button p {
+    opacity: 0;
+    transition: opacity 0.4s ease, transform 0.5s ease;
+    transform: translateX(100%);
+    position: absolute;
+    width: 150px;
+    right: 42px;
+    padding: 5px;
+    border-radius: 4px;
+    background-color: black;
+    color: white; 
+    z-index: 1;
+}
+
+.download_button a:hover p {
+    opacity: 1;
+    transform: translateX(0%);
+    color: #e3f2fd;
+}
+@media screen and (max-width:900px) {
+    .display-items{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    .experience{
+        min-width: 300px;
+    }
+}
+@media screen and (max-width:700px) {
+    .container{
+        display: block;
+    }
+    .container h2{
+        font-size:15px;
+    }
+    .experience{
+        width: 450px;
+    }
+    .Skills {
+        width:450px;
+        text-align:start;
+    }
+    .skills {
+        text-align:start;
+    }
+    .display-items{
+        display:block;
+    }
+}

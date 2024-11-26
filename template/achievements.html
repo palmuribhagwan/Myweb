@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static %}
+{% block link %}<link rel="stylesheet" href="{% static 'css/certification.css' %}">{% endblock  %}
+{% block  main %}
+<style>
+    .Achievements{
+        border-bottom:4px solid #2100df;
+    }
+</style>
+{% for main in main_head_achievements %}
+    {% if main.desk_image %}
+    <div class="project-img desktop">
+        <img src="{{main.desk_image.url}}">
+    </div>
+    {%endif%}
+    {% if main.moble_image %}
+    <div class="project-img mobile">
+        <img src="{{main.moble_image.url}}">
+    </div>
+    {% endif %}
+{% endfor %}
+<div class="products-container">
+    {% if main_head_achievements %}
+    <section class="main">
+        {% for main in main_head_achievements %}
+        <div>
+            <h1>{{main.Title}}</h1>
+            {% if main.paragraph %}
+            <p>{{main.paragraph}}</p>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </section>
+    {% endif %}
+    <div class="products-grid">
+        {% for achievement in achievements %}
+        <div class="product-card">
+            <img src="{{achievement.image.url}}" alt="Product 1" class="product-image">
+            <h2 class="product-name">{{achievement.title}}</h2>
+            <p class="product-price">{{achievement.about}}</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock%}

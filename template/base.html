@@ -1,0 +1,160 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% for navbar in Nav_Headers%}
+        {% if navbar.Title %}
+        {{navbar.Title}}
+        {% else %}
+        Portfolio
+        {% endif %}
+        {% endfor %}
+    </title>
+    <link rel="stylesheet" href="{% static 'css/Stylesheet.css' %}">
+    <link rel='icon' type="image/png" href='https://cdn-icons-png.flaticon.com/128/3135/3135715.png'>
+    {% block link %}{% endblock  %}
+    {% for navbar in Nav_Headers%}
+    <style>
+        .navbar{
+            background-color: {{navbar.header_color}};
+        }
+        .sidebar {
+            background-color: {{navbar.sidebar_color}};
+        }
+    </style>
+    {% endfor %}
+</head>
+<!--background-color: #00b5fd;-->
+<body>
+    <div class="navbar">
+        {% for navbar in Nav_Headers%}
+        <h2><a style='text-decoration:none;color:#ffff' href="/">{{navbar.Title}}</a></h2>
+        {% endfor %}
+        <ul class='menu-list'>
+            <li><a href="/" class='home'>Home</a></li>
+            {% for navbar in Nav_Headers%}
+            {% if navbar.Blogs %}
+            <li><a href="{% url 'Blogs_view' %}" class='Blogs'>Blogs</a></li>
+            {% endif %}
+            {% if navbar.Resume %}
+            <li><a href="{% url 'resume' %}" class='resume'>Resume</a></li>
+            {% endif %}
+            {% if navbar.Projects %}
+            <li><a href="{% url 'projects' %}" class='Projects'>Projects</a></li>
+            {% endif %}
+            {% if navbar.certificates %}
+            <li><a href="{% url 'certifications_view' %}" class='certificates'>certifications</a></li>
+            {% endif %}
+            {% if navbar.Achievements %}
+            <li><a href="{% url 'Achievements_view' %}" class='Achievements'>Achievements</a></li>
+            {% endif %}
+            {% if navbar.contact %}
+            <li><a href="{% url 'contact_view' %}" class='Contact'>Contact</a></li>
+            {% endif %}
+            {% if navbar.search %}
+            <li><svg width="25" height="25" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M23 21l-5.4-5.4a8.5 8.5 0 1 0-1.4 1.4L21.6 22 23 21zM10 16a6 6 0 1 1 0-12 6 6 0 0 1 0 12z" fill="#fff"/>
+              </svg>
+            </li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+        <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+    </div>
+    <div class="sidebar" id="sidebar">
+        <button class="closebtn" onclick="closeSidebar()">X</button>
+        <ul>
+            <li><a href="/" >Home</a></li>
+            {% for navbar in Nav_Headers %}
+            {% if navbar.Blogs %}
+            <li><a href="{% url 'Blogs_view' %}" >Blogs</a></li>
+            {% endif %}
+            {% if navbar.Resume %}
+            <li><a href="{% url 'resume' %}" >Resume</a></li>
+            {% endif %}
+            {% if navbar.Projects %}
+            <li><a href="{% url 'projects' %}">Projects</a></li>
+            {% endif %}
+            {% if navbar.certificates %}
+            <li><a href="{% url 'certifications_view' %}">certifications</a></li>
+            {% endif %}
+            {% if navbar.Achievements %}
+            <li><a href="{% url 'Achievements_view' %}">Achievements</a></li>
+            {% endif %}
+            {% if navbar.contact %}
+            <li><a href="{% url 'contact_view' %}">Contact</a></li>
+            {% endif %}
+            {% if navbar.search %}
+            <li><svg width="25" height="25" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M23 21l-5.4-5.4a8.5 8.5 0 1 0-1.4 1.4L21.6 22 23 21zM10 16a6 6 0 1 1 0-12 6 6 0 0 1 0 12z" fill="#fff"/>
+              </svg>
+            </li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+    <div id="main">
+        {% block  main %}{% endblock  %}
+    </div>
+</div>
+<footer>
+    {% if footer %}
+    {% for footer in footer %}
+    <div class="footer-content">
+        <div class="contact-info">
+            <h2>Contact Me</h2>
+            {% if footer.mail %}
+            <p><img src="https://cdn-icons-png.flaticon.com/128/732/732200.png"><a href="mailto:{{footer.mail}}">{{footer.mail}}</a></p>
+            {% endif %}
+            {% if footer.phone %}
+            <p><img src="https://cdn-icons-png.flaticon.com/128/15/15874.png"> <span>+91 {{footer.phone}}<span></p>
+            {% endif %}
+        </div>
+        <div class="social-links">
+            <h2>Follow Me</h2>
+            {% if footer.linkedin_link %}
+            <a href="{{footer.linkedin_link}}" class="social-icon">
+                <img src="https://cdn-icons-png.flaticon.com/128/4494/4494497.png">
+            </a>
+            {% endif %}
+            {% if footer.insta_link %}
+            <a href='{{footer.insta_link}}'>
+                <img src="https://cdn-icons-png.flaticon.com/128/1384/1384063.png">
+            </a>
+            {% endif %}
+            {% if footer.github_link %}
+            <a href="{{footer.github_link}}"  class="social-icon">
+                <img src="https://cdn-icons-png.flaticon.com/128/1051/1051326.png">             
+            </a>
+            {% endif %}
+            {% if footer.whatsapp_No %}
+            <a href="https://wa.me/{{footer.whatsapp_No}}" class="social-icon">
+                <img src="https://cdn-icons-png.flaticon.com/128/4423/4423697.png">             
+            </a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2024 {{footer.name}}. All Rights Reserved.</p>
+    </div>
+    {% endfor %}
+    {% endif %}
+</footer>
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            if (sidebar.style.transform === 'translateX(0%)') {
+                sidebar.style.transform = 'translateX(100%)';
+            } else {
+                sidebar.style.transform = 'translateX(0%)';
+            }
+        }
+        function closeSidebar() {
+            document.getElementById('sidebar').style.transform = 'translateX(100%)';
+        }    
+    </script>
+</body>
+</html>

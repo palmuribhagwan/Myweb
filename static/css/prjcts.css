@@ -1,0 +1,123 @@
+
+.project-main {
+    padding: 20px;
+}
+.desktop{
+    display: block;
+}
+.left{
+    padding-right: 20px;
+}
+.project{
+    background-color: #e3f2fd;
+    padding: 30px;
+    margin: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+.main{
+    background-color: #ffffff;
+    justify-content: space-between;
+}
+.main h1{
+    display: flex;
+    justify-content: center;
+}
+.experiance-container{
+    width: 60%;
+    padding-right:30px;
+    text-align: justify;
+}
+.experiance-container li{
+    padding-bottom: 10px;
+}
+.experiance-container ul{
+    display: block;
+}
+.project-links a{
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: #00b5fd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); 
+    margin:20px ;
+    color: #fff;
+    border-radius: 10px;
+}
+.image-container {
+    display: flex; 
+    align-items: center;
+    overflow: hidden;
+    width:45%;
+    margin-left: 10px; 
+}
+.image-container img {
+    display: block; 
+    width: 100%;
+    height: auto;
+}
+.mobile{
+    display: none;
+}
+.project-img img{
+    width: 100%;
+    height: 200px;
+}
+.main h1{
+    font-size:30px;
+    padding:0;
+    margin:0;
+}
+.video-container {
+    position: relative;
+    width: 100%;
+    margin: auto;
+    overflow: hidden;
+}
+
+.product-video {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+@media screen and (max-width: 900px) {
+    .project {
+        padding: 15px;
+    }
+}
+@media screen and (max-width: 700px) {
+    .desktop{
+        display: none;
+    }
+    .mobile{
+        display: block;
+    }
+    .mobile img{
+        height: 100px;
+    }
+    .image-container {
+        display: inline-block; 
+        overflow: hidden;
+        width:100%;
+    }
+    .project{
+        background-color: #e3f2fd;
+        padding: 30px;
+        margin: 10px;
+        display: block;
+        justify-content: space-between;
+    }
+    .project-links a{
+        margin: 0px;
+        height: 30px;
+        margin-top: 20px;
+    }
+    .experiance-container{
+        width: 100%;
+        padding-right:0px;
+        text-align: start;
+    }
+    .experiance-container ul{
+        display: none;
+    }
+}

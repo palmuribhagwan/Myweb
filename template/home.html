@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% load static %}
+{% block link %}<link rel="stylesheet" href="{% static 'css/Home.css' %}">{% endblock  %}
+{% block  main %}
+{% if popup %}
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <span class="close-btn" id="closePopupBtn">&times;</span>
+        {% for popup in popup %}
+        <h2>Hii am {{popup.Pop_Name}}</h2>
+        <p style='display:flex;margin-left:40px;'>{% if popup.popup_message %}{{popup.popup_message}}{% endif %}</p>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+{% if desktop_imgs %}
+<div class="slider desktop">
+    <div class="slides ">
+        {% for desktop_img in desktop_imgs %}
+        <div class="slide"><img src="{{desktop_img.image.url}}" alt="Image 1"></div>
+        {% endfor %}
+    </div>
+    <div class="dots">
+        {% for desktop_img in desktop_imgs %}
+        <span class="dot" data-slide="{{forloop.counter}}"></span>
+        {% endfor%}
+    </div>
+</div>
+{% endif %}
+{% if mobile_imgs %}
+<div class="slider mobile">
+    <div class="slides ">
+        {% for desktop_img in mobile_imgs %}
+        <div class="slide"><img src="{{desktop_img.image.url}}" alt="Image 1"></div>
+        {% endfor %}
+    </div>
+    <div class="dots">
+        {% for desktop_img in mobile_imgs %}
+        <span class="dot" data-slide="{{forloop.counter}}"></span>
+        {% endfor%}
+    </div>
+</div>
+{% endif %}
+{% if greetings %}
+<div class='greeting'>
+    {% for greeting in greetings %}
+    <div>
+        <h1>{{greeting.header}}</h1>
+        <p>{{greeting.message}}</p>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+<div class='profile-pic'>
+    {% if aboutimages %}
+    <div>
+        {% for aboutimage in aboutimages %}
+        <img src="{{aboutimage.image.url}}" alt>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% if home_paragraphs %}
+    <div class='profile-p'>
+        <h1 class='Aboutme'>About me !</h1>
+        <div>
+            {% for home_paragraph in home_paragraphs %}
+            <p>{{home_paragraph.paragraph}}</p>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+<div>
+<script>
+    document.getElementById('closePopupBtn').addEventListener('click', function() {
+        document.getElementById('popup').style.display = 'none';
+    });
+    window.addEventListener('click', function(event) {
+        if (event.target === document.getElementById('popup')) {
+            document.getElementById('popup').style.display = 'none';
+        }
+    });
+const sliders = document.querySelectorAll('.slider');
+
+sliders.forEach(slider => {
+    const slides = slider.querySelector('.slides');
+    const dots = slider.querySelectorAll('.dot');
+    let currentSlide = 0;
+
+    function showSlide(index) {
+        const totalSlides = dots.length;
+        if (index >= totalSlides) {
+            currentSlide = 0;
+        } else if (index < 0) {
+            currentSlide = totalSlides - 1;
+        } else {
+            currentSlide = index;
+        }
+
+        const offset = -100 * currentSlide;
+        slides.style.transform = `translateX(${offset}%)`;
+
+        dots.forEach(dot => dot.classList.remove('active'));
+        dots[currentSlide].classList.add('active');
+    }
+
+    showSlide(currentSlide);
+
+    setInterval(() => {
+        showSlide(currentSlide + 1);
+    }, 3000); 
+
+    dots.forEach(dot => {
+        dot.addEventListener('click', () => {
+            const slideIndex = parseInt(dot.getAttribute('data-slide'));
+            showSlide(slideIndex);
+        });
+    });
+});
+
+</script>
+{% endblock %}

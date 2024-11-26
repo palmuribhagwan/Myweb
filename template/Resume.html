@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% load static %}
+{% block link %}<link rel="stylesheet" href="{% static 'css/portfolio-resume.css' %}">{% endblock  %}
+{% block  main %}
+<style>
+    .resume{
+        border-bottom:4px solid #2100df;
+    }
+</style>
+<div class='download_button'>
+    {% for resume in Resume_pdf %}
+    <a href="{{resume.pdf.url}}" download>
+        <p style='color: #e3f2fd;'>download Resume</p>
+        <img src="https://cdn-icons-png.flaticon.com/128/2382/2382067.png">
+    </a>
+    {% endfor %}
+</div>
+{% for resume in resume_header %}
+{% if resume.image %}
+<div class='Resume'>
+    <img src='{{resume.image.url}}'>
+</div>
+{% endif %}
+<div class='Resume-about'>
+    <div>
+        <h1>{{resume.Title}}</h1>   
+        <p>{{resume.paragraph}}</p> 
+    </div>
+</div>
+{% endfor %}
+<div class='Resume-education'>
+    <div class="container">
+        <div>
+            {% if Education %}
+            <h2>Education</h2>
+            {% for education in Education %}
+            <div class="study-level higher-edu">
+                <h2 style="text-align:start;">{% if education.Degree %}{{education.Degree}} - {% endif %}{{education.college}} </h2>
+                {% if education.university %}<p style="text-align:start;padding-left:20px"><i>{{education.university}}</i></p>{% endif %}
+                <p style="text-align:start;padding-left:20px">{% if education.start_date %}{{education.start_date}}{% endif %}– {% if education.end_date %}{{education.end_date}}{% else %}Pursuing{% endif %}</p>
+                <p style="text-align:start;padding-left:20px">{% if education.Branch %}{{education.Branch}}{% endif %}</p>
+                {% if education.about %}
+                <ul class='education-comments'>
+                    <li style='text-align:start;padding-bottom:20px;'>{{education.about}}</li>
+                </ul>
+                {% endif %}
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+        {% if experiences %}
+        <style>
+            .experience ul li{
+                padding-bottom:10px;
+            }
+            @media screen and (max-width:700px) {
+                .experience ul{
+                    width:60%;
+                }
+            }
+        </style>
+        <div >
+            <h2>Experience</h2>
+            {% for experience in experiences %}
+            <div class="study-level higher-edu experience">
+                <h2 style="text-align:start;">{{experience.profession}}</h2>
+                <h4 style="text-align:start;padding-left:20px"><i>{{experience.company}}</i></h4>
+                <p style="text-align:start;padding-left:20px">{{experience.start_date}}-{% if experience.end_date %}{{experience.end_date}}{% else %}present{% endif %}</p>
+                <ul style="text-align:start;">
+                    {% for responsibility in experience.responsibility_set.all %}
+                    <li>{{responsibility.responsibility}}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+<div class='Resume-about'>
+    <div class="container">
+        {% if Skill_titles %}
+        <div>
+            <h1>Skills</h1>
+            <div class='display-items'>
+                {% for skill_title in Skill_titles %}
+                <div class='skills'>
+                    <h4>{{ skill_title.Title }}</h4>
+                    <ul>
+                        {% for skill in skill_title.skills.all %}
+                            <li style='padding-bottom:10px'>{{ skill.list }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% if contents %}
+<div class='Resume-about'>
+    {% for content in contents %}
+    <p>{{content.text}}</p>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% load static %}
+{% block link %}<link rel="stylesheet" href="{% static 'css/prjcts.css' %}">{% endblock  %}
+{% block  main %}
+<style>
+    .Projects{
+        border-bottom:4px solid #2100df;
+    }
+</style>
+{% for main in main_head_project%}
+    {% if main.desk_image %}
+    <div class="project-img desktop">
+        <img src="{{main.desk_image.url}}">
+    </div>
+    {%endif%}
+    {% if main.moble_image %}
+    <div class="project-img mobile">
+        <img src="{{main.moble_image.url}}">
+    </div>
+    {% endif %}
+{% endfor %}
+<main class="project-main">
+    {% if main_head_project %}
+    <section class="main">
+        {% for main in main_head_project %}
+        <div>
+            <h1>{{main.Title}}</h1>
+            {% if main.paragraph %}
+            <p>{{main.paragraph}}</p>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </section>
+    {% endif %}
+    {% if project %}
+    {% for project in project %}
+    <section class="project">
+        {% if project.view_imgvid_left %}
+        <style>
+            .image-container{
+                padding-right:20px;
+            }
+        </style>
+        <div class='image-container' >
+            <div>
+                {% if project.image %}
+                <img src="{{project.image.url}}" alt="Image 1">
+                {% endif %}
+                <br>
+                {% if project.video %}
+                <video controls class="product-video">
+                    <source src="{{project.video.url}}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+        <div class="experiance-container">
+            <h2>{{project.project_title}}</h2>
+            <p class="description">{{project.description}}</p>
+            {% if project.project_title %}
+            <p class="technologies desktop">
+                {% if project.ul_head %}
+                <strong>{{project.ul_head}}</strong>
+                {% endif %}
+                <ul>
+                    {% for list in project.project.all %}
+                    <li>{{list.list_context}}</li>
+                    {% endfor %}
+                </ul>
+            </p>
+            {% endif %}
+            {% if project.outcome %}
+            <p class="outcome"><strong>Outcome:<br></strong>{{project.outcome}}</p>
+            {% endif %}
+            <br>
+            <div class='project-links desktop'>
+                {% if project.link %}
+                <a href='{{project.link}}'>link</a>
+                {% endif %}
+                {% if project.source_code %}
+                <a href='{{project.source_code}}'> source code</a>
+                {% endif %}
+            </div>
+        </div>
+        {% if project.view_imgvid_Right %}
+        <div class='image-container'>
+            <div>
+                {% if project.image %}
+                <img src="{{project.image.url}}" alt="Image 1">
+                {% endif %}
+                <br>
+                {% if project.video %}
+                <video controls class="product-video">
+                    <source src="{{project.video.url}}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+        <br>
+        <br>
+        <div class='project-links mobile'>
+            {% if project.link %}
+            <a href='{{project.link}}'>link</a>
+            {% endif %}
+            {% if project.source_code %}
+            <a href='{{project.source_code}}'> source code</a>
+            {% endif %}
+        </div>
+    </section>
+    {% endfor %}
+    {% endif %}
+</main>
+{% endblock %}
